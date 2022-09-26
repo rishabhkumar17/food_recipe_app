@@ -2,14 +2,17 @@ import './App.css'
 import { YOUR_APP_ID, YOUR_APP_KEY } from './key'
 import Axios from 'axios'
 import { useState } from 'react'
+import RecipeTile from './RecipeTile'
 
 function App() {
   const [query, setQuery] = useState('')
+  const [recipes, setRecipes] = useState([])
 
   let url = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&&health=alcohol-free`
 
   async function getRecipes() {
     let result = await Axios.get(url)
+    setRecipes(result.data.hits)
     console.log(result.data)
   }
 
@@ -31,6 +34,11 @@ function App() {
         />
         <input className="app__submit" type="submit" placeholder="Search" />
       </form>
+      <div>
+        {recipes.map((recipe) => {
+          return <RecipeTile recipe={recipe} />
+        })}
+      </div>
     </div>
   )
 }
