@@ -1,4 +1,5 @@
 import React from 'react'
+import './RecipeTile.css'
 
 export default function RecipeTile({ recipe }) {
   return (
