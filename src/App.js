@@ -6,16 +6,22 @@ import { useState } from 'react'
 function App() {
   const [query, setQuery] = useState('')
 
-  let url = `https://api.edamam.com/search?q=chicken&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&&health=alcohol-free`
+  let url = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&&health=alcohol-free`
 
   async function getRecipes() {
     let result = await Axios.get(url)
     console.log(result.data)
   }
+
+  const submitIngredient = (e) => {
+    e.preventDefault()
+    getRecipes()
+  }
+
   return (
     <div className="app">
       <h1>Food Recipe</h1>
-      <form className="app__searchform">
+      <form className="app__searchform" onSubmit={submitIngredient}>
         <input
           type="text"
           className="app__input"
