@@ -34,7 +34,7 @@ function App() {
         />
         <input className="app__submit" type="submit" placeholder="Search" />
       </form>
-      <div>
+      <div className="app__recipes">
         {recipes.map((recipe) => {
           return <RecipeTile recipe={recipe} />
         })}
